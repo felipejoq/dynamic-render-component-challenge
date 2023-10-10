@@ -1,7 +1,7 @@
 import { BaseColaboradores } from "./data/colaboradores";
 
-function App() {
+const ColaboradoresApp = () => {
     return <>Hola Mundo!</>;
-}
+};
 
-export default App;
+export default ColaboradoresApp;
