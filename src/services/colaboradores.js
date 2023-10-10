@@ -7,7 +7,7 @@ export const getAllColaborators = () => {
 export const searchColaborators = (colaborators, term) => {
     return colaborators.filter((colaborador) => {
         for (let value in colaborador) {
-            if (colaborador[value].toLowerCase().includes(term.toLowerCase())) {
+            if (colaborador[value].toLowerCase().includes(term.toLowerCase().trim())) {
                 return colaborador;
             }
         }

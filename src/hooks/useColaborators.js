@@ -21,7 +21,6 @@ export const useColaborators = () => {
 
     const handleNewColaborador = (colaborador) => {
         setColaboradores([...colaboradores, colaborador]);
-        setSearchResult([]);
         setSearchValue("");
     };
 
@@ -48,6 +47,8 @@ export const useColaborators = () => {
     const removeColaborador = (id) => {
         // TODO: Desarrollar la lógica para borrar un colaborador.
         console.log('Borrar colaborador con id:', id);
+        const result = colaboradores.filter(colaborador => colaborador.id !== id ? colaborador : null)
+        setColaboradores(result);
     }
 
     return {
