@@ -1,6 +1,35 @@
+import { useState } from "react";
+
+const initialForm = {
+    id: "",
+    nombre: "",
+    correo: "",
+    edad: "",
+    cargo: "",
+    telefono: "",
+}
+
 export const Formulario = () => {
+
+    const [formState, setFormState] = useState(initialForm);
+
+    const { nombre, correo, edad, cargo, telefono} = formState;
+
+    const handleOnSubmitForm = (event) => {
+        event.preventDefault();
+        // TODO: Validar que ningún campo esté vacío.
+    }
+
+    const handleInputChange = ({target}) => {
+        const {name, value} = target;
+        setFormState({
+            ...formState,
+            [name]: value
+        })
+    }
+
     return (
-        <form>
+        <form onSubmit={handleOnSubmitForm}>
             <h2>Agregar Colaborador</h2>
             <div className="my-2">
                 <label htmlFor="nombre" className="form-label">
@@ -12,6 +41,8 @@ export const Formulario = () => {
                     id="nombre"
                     name="nombre"
                     placeholder="Nombre del colaborador"
+                    value={nombre}
+                    onChange={handleInputChange}
                 />
             </div>
             <div className="my-2">
@@ -24,6 +55,8 @@ export const Formulario = () => {
                     id="correo"
                     name="correo"
                     placeholder="Email del colaborador"
+                    value={correo}
+                    onChange={handleInputChange}
                 />
             </div>
             <div className="my-2">
@@ -36,6 +69,8 @@ export const Formulario = () => {
                     id="edad"
                     name="edad"
                     placeholder="Edad del colaborador"
+                    value={edad}
+                    onChange={handleInputChange}
                 />
             </div>
             <div className="my-2">
@@ -48,6 +83,8 @@ export const Formulario = () => {
                     id="cargo"
                     name="cargo"
                     placeholder="Cargo del colaborador"
+                    value={cargo}
+                    onChange={handleInputChange}
                 />
             </div>
             <div className="my-2">
@@ -60,6 +97,8 @@ export const Formulario = () => {
                     id="telefono"
                     name="telefono"
                     placeholder="Teléfono del colaborador"
+                    value={telefono}
+                    onChange={handleInputChange}
                 />
             </div>
             <button className="btn btn-primary my-2 w-100">
