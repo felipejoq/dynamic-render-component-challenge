@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { validateInputs } from "../helpers/formValidations";
+import { useForm } from "../hooks/useForm";
 
 const initialForm = {
     nombre: "",
@@ -11,40 +11,21 @@ const initialForm = {
 
 export const Formulario = ({ handleNewColaborador, handleValidationsErrors }) => {
 
-    const [formState, setFormState] = useState(initialForm);
+    const { handleInputChange, cleanValue, resetForm, formState } = useForm(initialForm)
 
     const { nombre, correo, edad, cargo, telefono } = formState;
 
     const handleOnSubmitForm = (event) => {
         event.preventDefault();
-
         handleValidationsErrors(validateInputs(formState));
-
         if(validateInputs(formState).length === 0){
             const newColaborator = {
                 ...formState,
                 id: self.crypto.randomUUID()
             }
-    
             handleNewColaborador(newColaborator);
-            setFormState(initialForm);   
+            resetForm();
         }        
-    }
-
-    const handleInputChange = ({ target }) => {
-        const { name, value } = target;
-        setFormState({
-            ...formState,
-            [name]: value
-        });
-    }
-
-    const cleanValue = ({ target }) => {
-        const { value, name } = target;
-        setFormState({
-            ...formState,
-            [name]: value.trim(),
-        });
     }
 
     return (
