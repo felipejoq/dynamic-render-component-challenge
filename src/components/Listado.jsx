@@ -1,4 +1,4 @@
-export const Listado = () => {
+export const Listado = ({ colaboradores }) => {
     return (
         <table className="table">
             <thead>
@@ -11,13 +11,17 @@ export const Listado = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>fffdo</td>
-                </tr>
+                {colaboradores.map(
+                    ({ id, nombre, correo, edad, cargo, telefono }) => (
+                        <tr key={id}>
+                            <td>{nombre}</td>
+                            <td>{correo}</td>
+                            <td>{edad}</td>
+                            <td>{cargo}</td>
+                            <td>{telefono}</td>
+                        </tr>
+                    )
+                )}
             </tbody>
         </table>
     );

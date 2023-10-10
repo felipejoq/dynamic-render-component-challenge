@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import { Alert } from "./components/Alert";
 import { Buscador } from "./components/Buscador";
 import { Formulario } from "./components/Formulario";
 import { Listado } from "./components/Listado";
+import { getAllColaborators } from "./services/colaboradores";
 
 const ColaboradoresApp = () => {
+    const [colaboradores, setColaboradores] = useState([]);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        const colaboradoresData = getAllColaborators();
+        setColaboradores([...colaboradoresData]);
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -18,7 +31,7 @@ const ColaboradoresApp = () => {
             </div>
             <div className="row">
                 <div className="col-8">
-                    <Listado />
+                    <Listado colaboradores={colaboradores} />
                 </div>
                 <div className="col-4">
                     <Formulario />
