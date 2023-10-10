@@ -10,6 +10,7 @@ const ColaboradoresApp = () => {
     searchValue,
     searchResult,
     messages,
+    colaboradores,
     searchColaborador,
     setSearchValue,
     dataToTable,
@@ -43,8 +44,8 @@ const ColaboradoresApp = () => {
                 removeColaborador={removeColaborador}
               />
               {
-                (searchResult.length === 0 && searchValue) &&
-                <Alert message="No hay resultados" color="info" />
+                (searchResult.length === 0 && searchValue || colaboradores.length === 0) &&
+                <Alert message="No hay registros" color="info" />
               }
             </div>
           </div>
