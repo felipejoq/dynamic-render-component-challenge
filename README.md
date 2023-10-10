@@ -1,10 +1,10 @@
 # 📝 Base de datos colaboradores
 
-Desafío que pone a prueba el manejo de estados de componentes usando React.js y sus hooks. Además de generar componentes de forma dinámica. Todo el desafío queda explicado en [este Archivo PDF](https://github.com/arnaldotorrealba/DesafioLatam-19/blob/main/desafio_Base_de_datos_colaboradores.pdf?raw=true).
+Desafío que pone a prueba el manejo de estados de componentes usando React.js y sus hooks. Además de generar componentes de forma dinámica. Todo el desafío queda explicado en [este Archivo PDF](https://github.com/felipejoq/dynamic-render-component-challenge/blob/main/desafio_Base_de_datos_colaboradores.pdf?raw=true).
 
 ℹ️ También se incluye el uso de Hooks personalizados (useForm y useColaboradores) lo que permite extraer la lógica de los componentes de react para dejarlos fáciles de leer y mantenibles.
 
-👉 [Live demo](https://arnaldotorrealba.github.io/DesafioLatam-19) 🚀
+👉 [Live demo](https://felipejoq.github.io/dynamic-render-component-challenge) 🚀
 
 ## 👨‍💻 Desarrolladores
 
@@ -19,7 +19,7 @@ Desafío que pone a prueba el manejo de estados de componentes usando React.js y
 
 ## 📸 Vista previa
 
-![Vista previa](https://github.com/arnaldotorrealba/DesafioLatam-19/blob/main/preview.png?raw=true)
+![Vista previa](https://github.com/felipejoq/dynamic-render-component-challenge/blob/main/preview.png?raw=true)
 
 
 ## 🚀 Para desarrollar
