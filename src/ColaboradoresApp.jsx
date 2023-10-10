@@ -8,6 +8,8 @@ import { getAllColaborators } from "./services/colaboradores";
 const ColaboradoresApp = () => {
     const [colaboradores, setColaboradores] = useState([]);
 
+    const [searchResult, setSearchResult] = useState([]);
+
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
@@ -20,22 +22,34 @@ const ColaboradoresApp = () => {
     };
 
     const handleNewColaborador = (colaborador) => {
-        setColaboradores([
-            ...colaboradores,
-            colaborador
-        ]);
-    }
+        setColaboradores([...colaboradores, colaborador]);
+        setSearchResult([]);
+    };
 
     const handleValidationsErrors = (messages) => {
         if (messages.length > 0) {
             setMessages(messages);
         } else {
-            setMessages([{
-                message: 'Colaborador agregado con éxito!',
-                color: "success"
-            }])
+            setMessages([
+                {
+                    message: "Colaborador agregado con éxito!",
+                    color: "success",
+                },
+            ]);
         }
-    }
+    };
+
+    const searchColaborador = (searchValue) => {
+        const result = colaboradores.filter((colaborador) => {
+            for (let value in colaborador) {
+                if (colaborador[value].includes(searchValue)) {
+                    return colaborador;
+                }
+            }
+        });
+
+        setSearchResult(result);
+    };
 
     return (
         <div className="container">
@@ -46,29 +60,33 @@ const ColaboradoresApp = () => {
             </div>
             <div className="row">
                 <div className="col-6 my-3">
-                    <Buscador />
+                    <Buscador searchColaborador={searchColaborador} />
                 </div>
             </div>
             <div className="row">
                 <div className="col-12 col-lg-8 ">
-                    <Listado colaboradores={colaboradores} />
+                    <Listado
+                        colaboradores={
+                            searchResult.length === 0
+                                ? colaboradores
+                                : searchResult
+                        }
+                    />
                 </div>
                 <div className="col-12 col-lg-4">
                     <Formulario
                         handleNewColaborador={handleNewColaborador}
                         handleValidationsErrors={handleValidationsErrors}
                     />
-                    {
-                        messages.length > 0 ?
-                            messages.map(error => (
-                                <Alert
-                                    key={self.crypto.randomUUID()}
-                                    message={error.message}
-                                    color={error.color}
-                                />
-                            )) :
-                            null
-                    }
+                    {messages.length > 0
+                        ? messages.map((error) => (
+                              <Alert
+                                  key={self.crypto.randomUUID()}
+                                  message={error.message}
+                                  color={error.color}
+                              />
+                          ))
+                        : null}
                 </div>
             </div>
         </div>
