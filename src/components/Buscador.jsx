@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-export const Buscador = ({ searchColaborador, searchValue, setSearchValue}) => {
+export const Buscador = ({ searchColaborador, searchValue, setSearchValue }) => {
     // const [searchValue, setSearchValue] = useState("");
     const handleSearchInput = ({ target }) => {
         setSearchValue(target.value);
@@ -11,16 +9,21 @@ export const Buscador = ({ searchColaborador, searchValue, setSearchValue}) => {
     };
 
     return (
-        <input
-            type="text"
-            name=""
-            className="form-control"
-            placeholder="Busca un Colaborador"
-            value={searchValue}
-            onChange={(event) => {
-                handleSearchInput(event);
-                onSearchValue(event);
-            }}
-        />
+        <>
+            <label htmlFor="search" className="form-label">
+                Buscador:
+            </label>
+            <input
+                type="text"
+                id="search"
+                className="form-control"
+                placeholder="Busca un Colaborador"
+                value={searchValue}
+                onChange={(event) => {
+                    handleSearchInput(event);
+                    onSearchValue(event);
+                }}
+            />
+        </>
     );
 };

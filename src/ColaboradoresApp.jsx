@@ -23,11 +23,10 @@ const ColaboradoresApp = () => {
       <div className="row">
         <div className="col">
           <h1><i className="bi bi-person-workspace"></i> Lista de Colaboradores</h1>
-          <hr />
         </div>
       </div>
       <div className="row">
-        <div className="col-12 col-lg-6 my-3">
+        <div className="col-12 col-lg-8 mb-4 mt-2">
           <Buscador
             searchColaborador={searchColaborador}
             searchValue={searchValue}
