@@ -29,8 +29,8 @@ export const Formulario = ({ handleNewColaborador, handleValidationsErrors }) =>
     }
 
     return (
-        <form className="mx-2" onSubmit={handleOnSubmitForm}>
-            <h3>Agregar Colaborador</h3>
+        <form className="m-3" onSubmit={handleOnSubmitForm}>
+            <h3 className="text-center">Agregar Colaborador</h3>
             <hr />
             <div className="my-2">
                 <div className="input-group mb-3">

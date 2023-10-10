@@ -25,24 +25,29 @@ const ColaboradoresApp = () => {
           <h1><i className="bi bi-person-workspace"></i> Lista de Colaboradores</h1>
         </div>
       </div>
-      <div className="row">
-        <div className="col-12 col-lg-8 mb-4 mt-2">
-          <Buscador
-            searchColaborador={searchColaborador}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue} />
-        </div>
-      </div>
+
       <div className="row">
         <div className="col-12 col-lg-8">
-          <Listado
-            colaboradores={dataToTable()}
-            removeColaborador={removeColaborador}
-          />
-          {
-            searchResult.length === 0 && searchValue &&
-            <Alert message="No hay resultados" color="info" />
-          }
+          <div className="row">
+            <div className="col-12 col-lg-12 mb-2 mt-2">
+              <Buscador
+                searchColaborador={searchColaborador}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 col-lg-12">
+              <Listado
+                colaboradores={dataToTable()}
+                removeColaborador={removeColaborador}
+              />
+              {
+                (searchResult.length === 0 && searchValue) &&
+                <Alert message="No hay resultados" color="info" />
+              }
+            </div>
+          </div>
         </div>
         <div className="col-12 col-lg-4">
           <Formulario
