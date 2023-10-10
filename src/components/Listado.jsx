@@ -26,12 +26,12 @@ export const Listado = ({ colaboradores, removeColaborador }) => {
                                 <td>{edad}</td>
                                 <td>{cargo}</td>
                                 <td>{telefono}</td>
-                                <td>
+                                <td className="text-center">
                                     <button
                                         className="btn btn-sm btn-danger"
                                         onClick={() => handleRemoveColaborador(id)}
                                     >
-                                        Borrar
+                                        <i className="bi bi-trash3-fill"></i>
                                     </button>
                                 </td>
                             </tr>
