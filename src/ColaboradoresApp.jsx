@@ -8,6 +8,8 @@ import { getAllColaborators } from "./services/colaboradores";
 const ColaboradoresApp = () => {
     const [colaboradores, setColaboradores] = useState([]);
 
+    const [messages, setMessages] = useState([]);
+
     useEffect(() => {
         getData();
     }, []);
@@ -24,6 +26,17 @@ const ColaboradoresApp = () => {
         ]);
     }
 
+    const handleValidationsErrors = (messages) => {
+        if (messages.length > 0) {
+            setMessages(messages);
+        } else {
+            setMessages([{
+                message: 'Colaborador agregado con éxito!',
+                color: "success"
+            }])
+        }
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -37,12 +50,25 @@ const ColaboradoresApp = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col-8">
+                <div className="col-12 col-lg-8 ">
                     <Listado colaboradores={colaboradores} />
                 </div>
-                <div className="col-4">
-                    <Formulario handleNewColaborador={handleNewColaborador} />
-                    <Alert />
+                <div className="col-12 col-lg-4">
+                    <Formulario
+                        handleNewColaborador={handleNewColaborador}
+                        handleValidationsErrors={handleValidationsErrors}
+                    />
+                    {
+                        messages.length > 0 ?
+                            messages.map(error => (
+                                <Alert
+                                    key={self.crypto.randomUUID()}
+                                    message={error.message}
+                                    color={error.color}
+                                />
+                            )) :
+                            null
+                    }
                 </div>
             </div>
         </div>

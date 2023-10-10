@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { validateInputs } from "../helpers/formValidations";
 
 const initialForm = {
     nombre: "",
@@ -8,7 +9,7 @@ const initialForm = {
     telefono: "",
 }
 
-export const Formulario = ({ handleNewColaborador }) => {
+export const Formulario = ({ handleNewColaborador, handleValidationsErrors }) => {
 
     const [formState, setFormState] = useState(initialForm);
 
@@ -17,15 +18,17 @@ export const Formulario = ({ handleNewColaborador }) => {
     const handleOnSubmitForm = (event) => {
         event.preventDefault();
 
-        // TODO: Validar que ningún campo esté vacío.
+        handleValidationsErrors(validateInputs(formState));
 
-        const newColaborator = {
-            ...formState,
-            id: self.crypto.randomUUID()
-        }
-
-        handleNewColaborador(newColaborator);
-        setFormState(initialForm);
+        if(validateInputs(formState).length === 0){
+            const newColaborator = {
+                ...formState,
+                id: self.crypto.randomUUID()
+            }
+    
+            handleNewColaborador(newColaborator);
+            setFormState(initialForm);   
+        }        
     }
 
     const handleInputChange = ({ target }) => {
@@ -33,7 +36,15 @@ export const Formulario = ({ handleNewColaborador }) => {
         setFormState({
             ...formState,
             [name]: value
-        })
+        });
+    }
+
+    const cleanValue = ({ target }) => {
+        const { value, name } = target;
+        setFormState({
+            ...formState,
+            [name]: value.trim(),
+        });
     }
 
     return (
@@ -51,6 +62,7 @@ export const Formulario = ({ handleNewColaborador }) => {
                     placeholder="Nombre del colaborador"
                     value={nombre}
                     onChange={handleInputChange}
+                    onBlur={cleanValue}
                 />
             </div>
             <div className="my-2">
@@ -58,13 +70,14 @@ export const Formulario = ({ handleNewColaborador }) => {
                     Email:
                 </label>
                 <input
-                    type="email"
+                    type="text"
                     className="form-control"
                     id="correo"
                     name="correo"
                     placeholder="Email del colaborador"
                     value={correo}
                     onChange={handleInputChange}
+                    onBlur={cleanValue}
                 />
             </div>
             <div className="my-2">
@@ -79,6 +92,7 @@ export const Formulario = ({ handleNewColaborador }) => {
                     placeholder="Edad del colaborador"
                     value={edad}
                     onChange={handleInputChange}
+                    onBlur={cleanValue}
                 />
             </div>
             <div className="my-2">
@@ -93,6 +107,7 @@ export const Formulario = ({ handleNewColaborador }) => {
                     placeholder="Cargo del colaborador"
                     value={cargo}
                     onChange={handleInputChange}
+                    onBlur={cleanValue}
                 />
             </div>
             <div className="my-2">
@@ -107,6 +122,7 @@ export const Formulario = ({ handleNewColaborador }) => {
                     placeholder="Teléfono del colaborador"
                     value={telefono}
                     onChange={handleInputChange}
+                    onBlur={cleanValue}
                 />
             </div>
             <button className="btn btn-primary my-2 w-100">
