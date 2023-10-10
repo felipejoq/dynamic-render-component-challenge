@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-export const Buscador = ({ searchColaborador }) => {
-    const [searchValue, setSearchValue] = useState("");
-
+export const Buscador = ({ searchColaborador, searchValue, setSearchValue}) => {
+    // const [searchValue, setSearchValue] = useState("");
     const handleSearchInput = ({ target }) => {
         setSearchValue(target.value);
     };

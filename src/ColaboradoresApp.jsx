@@ -3,94 +3,94 @@ import { Alert } from "./components/Alert";
 import { Buscador } from "./components/Buscador";
 import { Formulario } from "./components/Formulario";
 import { Listado } from "./components/Listado";
-import { getAllColaborators } from "./services/colaboradores";
+import { getAllColaborators, searchColaborators } from "./services/colaboradores";
 
 const ColaboradoresApp = () => {
-    const [colaboradores, setColaboradores] = useState([]);
+  const [colaboradores, setColaboradores] = useState([]);
 
-    const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
 
-    const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-        getData();
-    }, []);
+  const [searchValue, setSearchValue] = useState("");
 
-    const getData = () => {
-        const colaboradoresData = getAllColaborators();
-        setColaboradores([...colaboradoresData]);
-    };
+  useEffect(() => {
+    getData();
+  }, []);
 
-    const handleNewColaborador = (colaborador) => {
-        setColaboradores([...colaboradores, colaborador]);
-        setSearchResult([]);
-    };
+  const getData = () => {
+    const colaboradoresData = getAllColaborators();
+    setColaboradores([...colaboradoresData]);
+  };
 
-    const handleValidationsErrors = (messages) => {
-        if (messages.length > 0) {
-            setMessages(messages);
-        } else {
-            setMessages([
-                {
-                    message: "Colaborador agregado con éxito!",
-                    color: "success",
-                },
-            ]);
-        }
-    };
+  const handleNewColaborador = (colaborador) => {
+    setColaboradores([...colaboradores, colaborador]);
+    setSearchResult([]);
+    setSearchValue("");
+  };
 
-    const searchColaborador = (searchValue) => {
-        const result = colaboradores.filter((colaborador) => {
-            for (let value in colaborador) {
-                if (colaborador[value].includes(searchValue)) {
-                    return colaborador;
-                }
-            }
-        });
+  const handleValidationsErrors = (messages) => {
+    if (messages.length > 0) {
+      setMessages(messages);
+    } else {
+      setMessages([{
+        message: "Colaborador agregado con éxito!",
+        color: "success",
+      }]);
+    }
+  };
 
-        setSearchResult(result);
-    };
+  const searchColaborador = (searchValue) => {
+    const result = searchColaborators(colaboradores, searchValue)
+    setSearchResult(result);
+  };
 
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="col">
-                    <h1>Lista de Colaboradores</h1>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-6 my-3">
-                    <Buscador searchColaborador={searchColaborador} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 col-lg-8 ">
-                    <Listado
-                        colaboradores={
-                            searchResult.length === 0
-                                ? colaboradores
-                                : searchResult
-                        }
-                    />
-                </div>
-                <div className="col-12 col-lg-4">
-                    <Formulario
-                        handleNewColaborador={handleNewColaborador}
-                        handleValidationsErrors={handleValidationsErrors}
-                    />
-                    {messages.length > 0
-                        ? messages.map((error) => (
-                              <Alert
-                                  key={self.crypto.randomUUID()}
-                                  message={error.message}
-                                  color={error.color}
-                              />
-                          ))
-                        : null}
-                </div>
-            </div>
+  const dataToTable = () => {
+    return searchValue ? searchResult : colaboradores;
+  };
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <h1>Lista de Colaboradores</h1>
         </div>
-    );
+      </div>
+      <div className="row">
+        <div className="col-6 my-3">
+          <Buscador
+            searchColaborador={searchColaborador}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 col-lg-8 ">
+          <Listado colaboradores={dataToTable()} />
+          {
+            searchResult.length === 0 && searchValue &&
+            <Alert message="No hay resultados" color="info" />
+          }
+        </div>
+        <div className="col-12 col-lg-4">
+          <Formulario
+            handleNewColaborador={handleNewColaborador}
+            handleValidationsErrors={handleValidationsErrors}
+          />
+          {
+            messages.length > 0
+              && messages.map((error) => (
+                <Alert
+                  key={self.crypto.randomUUID()}
+                  message={error.message}
+                  color={error.color}
+                />
+              ))
+          }
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ColaboradoresApp;
