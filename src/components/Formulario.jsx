@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const initialForm = {
-    id: "",
     nombre: "",
     correo: "",
     edad: "",
@@ -9,19 +8,28 @@ const initialForm = {
     telefono: "",
 }
 
-export const Formulario = () => {
+export const Formulario = ({ handleNewColaborador }) => {
 
     const [formState, setFormState] = useState(initialForm);
 
-    const { nombre, correo, edad, cargo, telefono} = formState;
+    const { nombre, correo, edad, cargo, telefono } = formState;
 
     const handleOnSubmitForm = (event) => {
         event.preventDefault();
+
         // TODO: Validar que ningún campo esté vacío.
+
+        const newColaborator = {
+            ...formState,
+            id: self.crypto.randomUUID()
+        }
+
+        handleNewColaborador(newColaborator);
+        setFormState(initialForm);
     }
 
-    const handleInputChange = ({target}) => {
-        const {name, value} = target;
+    const handleInputChange = ({ target }) => {
+        const { name, value } = target;
         setFormState({
             ...formState,
             [name]: value

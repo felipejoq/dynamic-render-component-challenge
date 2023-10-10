@@ -17,6 +17,13 @@ const ColaboradoresApp = () => {
         setColaboradores([...colaboradoresData]);
     };
 
+    const handleNewColaborador = (colaborador) => {
+        setColaboradores([
+            ...colaboradores,
+            colaborador
+        ]);
+    }
+
     return (
         <div className="container">
             <div className="row">
@@ -34,7 +41,7 @@ const ColaboradoresApp = () => {
                     <Listado colaboradores={colaboradores} />
                 </div>
                 <div className="col-4">
-                    <Formulario />
+                    <Formulario handleNewColaborador={handleNewColaborador} />
                     <Alert />
                 </div>
             </div>
