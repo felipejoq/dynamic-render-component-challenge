@@ -1,14 +1,15 @@
 export const Listado = ({ colaboradores }) => {
     return (
         <div className="table-responsive">
-            <table className="table">
-                <thead>
+            <table className="table table-striped">
+                <thead className="table-dark">
                     <tr>
                         <th scope="col-3">Nombre</th>
                         <th scope="col-4">Correo</th>
                         <th scope="col-1">Edad</th>
                         <th scope="col-3">Cargo</th>
                         <th scope="col-1">Teléfono</th>
+                        <th scope="col-1">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,11 @@ export const Listado = ({ colaboradores }) => {
                                 <td>{edad}</td>
                                 <td>{cargo}</td>
                                 <td>{telefono}</td>
+                                <td>
+                                    <button className="btn btn-sm btn-danger">
+                                        Borrar
+                                    </button>
+                                </td>
                             </tr>
                         )
                     )}

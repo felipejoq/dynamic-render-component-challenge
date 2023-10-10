@@ -3,3 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.icon-md {
+    font-size: 1.2rem;
+}

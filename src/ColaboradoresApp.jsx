@@ -18,14 +18,15 @@ const ColaboradoresApp = () => {
   } = useColaborators();
 
   return (
-    <div className="container">
+    <div className="container my-4">
       <div className="row">
         <div className="col">
-          <h1>Lista de Colaboradores</h1>
+          <h1><i className="bi bi-person-workspace"></i> Lista de Colaboradores</h1>
+          <hr />
         </div>
       </div>
       <div className="row">
-        <div className="col-6 my-3">
+        <div className="col-12 col-lg-6 my-3">
           <Buscador
             searchColaborador={searchColaborador}
             searchValue={searchValue}
@@ -33,7 +34,7 @@ const ColaboradoresApp = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-12 col-lg-8 ">
+        <div className="col-12 col-lg-8">
           <Listado colaboradores={dataToTable()} />
           {
             searchResult.length === 0 && searchValue &&

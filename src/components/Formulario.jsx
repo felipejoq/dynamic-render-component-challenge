@@ -18,19 +18,20 @@ export const Formulario = ({ handleNewColaborador, handleValidationsErrors }) =>
     const handleOnSubmitForm = (event) => {
         event.preventDefault();
         handleValidationsErrors(validateInputs(formState));
-        if(validateInputs(formState).length === 0){
+        if (validateInputs(formState).length === 0) {
             const newColaborator = {
                 ...formState,
                 id: self.crypto.randomUUID()
             }
             handleNewColaborador(newColaborator);
             resetForm();
-        }        
+        }
     }
 
     return (
-        <form onSubmit={handleOnSubmitForm}>
-            <h2>Agregar Colaborador</h2>
+        <form className="mx-2" onSubmit={handleOnSubmitForm}>
+            <h3>Agregar Colaborador</h3>
+            <hr />
             <div className="my-2">
                 <label htmlFor="nombre" className="form-label">
                     Nombre:
@@ -107,7 +108,7 @@ export const Formulario = ({ handleNewColaborador, handleValidationsErrors }) =>
                 />
             </div>
             <button className="btn btn-primary my-2 w-100">
-                Agregar Colaborador
+                <i className="bi bi-person-plus-fill"></i> Agregar Colaborador
             </button>
         </form>
     );
