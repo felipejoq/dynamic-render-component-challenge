@@ -1,4 +1,9 @@
-export const Listado = ({ colaboradores }) => {
+export const Listado = ({ colaboradores, removeColaborador }) => {
+
+    const handleRemoveColaborador = (id) => {
+        removeColaborador(id)
+    }
+
     return (
         <div className="table-responsive">
             <table className="table table-striped">
@@ -22,7 +27,10 @@ export const Listado = ({ colaboradores }) => {
                                 <td>{cargo}</td>
                                 <td>{telefono}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-danger">
+                                    <button
+                                        className="btn btn-sm btn-danger"
+                                        onClick={() => handleRemoveColaborador(id)}
+                                    >
                                         Borrar
                                     </button>
                                 </td>

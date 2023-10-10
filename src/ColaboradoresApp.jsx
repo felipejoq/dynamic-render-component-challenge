@@ -12,9 +12,10 @@ const ColaboradoresApp = () => {
     messages,
     searchColaborador,
     setSearchValue,
-    dataToTable, 
+    dataToTable,
     handleNewColaborador,
-    handleValidationsErrors
+    handleValidationsErrors,
+    removeColaborador
   } = useColaborators();
 
   return (
@@ -35,7 +36,10 @@ const ColaboradoresApp = () => {
       </div>
       <div className="row">
         <div className="col-12 col-lg-8">
-          <Listado colaboradores={dataToTable()} />
+          <Listado
+            colaboradores={dataToTable()}
+            removeColaborador={removeColaborador}
+          />
           {
             searchResult.length === 0 && searchValue &&
             <Alert message="No hay resultados" color="info" />

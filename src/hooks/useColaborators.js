@@ -44,6 +44,11 @@ export const useColaborators = () => {
     const dataToTable = () => {
         return searchValue ? searchResult : colaboradores;
     };
+    
+    const removeColaborador = (id) => {
+        // TODO: Desarrollar la lógica para borrar un colaborador.
+        console.log('Borrar colaborador con id:', id);
+    }
 
     return {
         colaboradores,
@@ -54,6 +59,7 @@ export const useColaborators = () => {
         dataToTable,
         searchColaborador,
         handleValidationsErrors,
-        handleNewColaborador
+        handleNewColaborador,
+        removeColaborador
     }
 }
