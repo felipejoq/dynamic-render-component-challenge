@@ -4,6 +4,7 @@ import { Formulario } from "./components/Formulario";
 import { Listado } from "./components/Listado";
 import { useColaborators } from "./hooks/useColaborators";
 
+
 const ColaboradoresApp = () => {
 
   const {

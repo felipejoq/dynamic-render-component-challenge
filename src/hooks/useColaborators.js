@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllColaborators, searchColaborators } from "../services/colaboradores";
+import { confirmAlert, successAlert } from "../helpers/sweetalerts";
 
 export const useColaborators = () => {
     const [colaboradores, setColaboradores] = useState([]);
@@ -22,6 +23,7 @@ export const useColaborators = () => {
     const handleNewColaborador = (colaborador) => {
         setColaboradores([...colaboradores, colaborador]);
         setSearchValue("");
+        successAlert(`${colaborador.nombre} fue agregado con éxito!`);
     };
 
     const handleValidationsErrors = (messages) => {
@@ -44,9 +46,17 @@ export const useColaborators = () => {
         return searchValue ? searchResult : colaboradores;
     };
     
-    const removeColaborador = (id) => {
-        const result = colaboradores.filter(colaborador => colaborador.id !== id ? colaborador : null)
-        setColaboradores(result);
+    const removeColaborador = async (id) => {
+        const colaborator = colaboradores.find(colaborador => colaborador.id === id);
+        const title = `¿Quiere borrar a ${colaborator.nombre}?`;
+        const message = "Esta es una acción irreversible. Confirme si quiere eliminar.";
+        const {isConfirmed} = await confirmAlert(title, message);
+        if(isConfirmed) {
+            const result = colaboradores.filter(colaborador => colaborador.id !== id ? colaborador : null);
+            setColaboradores(result);
+            setSearchValue("");
+            successAlert(`Colaborador borrado con éxito!`);
+        }
     }
 
     return {
